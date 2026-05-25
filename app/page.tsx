@@ -1,3 +1,29 @@
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
+
+export default function Home() {
+  return (
+    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-slate-50">
+      <Card className="w-[350px]">
+        <CardHeader>
+          <CardTitle>새로운 웹사이트</CardTitle>
+          <CardDescription>Next.js와 shadcn/ui로 구축 중입니다.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <p className="text-sm text-slate-600">
+            여기에 블로그 글이나 상품 정보를 매력적으로 배치할 수 있습니다.
+          </p>
+        </CardContent>
+        <CardFooter className="flex justify-between">
+          <Button variant="outline">취소</Button>
+          <Button>자세히 보기</Button>
+        </CardFooter>
+      </Card>
+    </main>
+  )
+}
+
+/*
 import Image from "next/image";
 
 export default function Home() {
@@ -63,3 +89,4 @@ export default function Home() {
     </div>
   );
 }
+*/
