@@ -1,9 +1,28 @@
+/* 
+ * [실행 순서 1단계: 글로벌 스타일 및 테마 정의 (app/globals.css)]
+ * Next.js 애플리케이션이 구동되면서 가장 먼저 로드되는 글로벌 스타일시트입니다.
+ * Tailwind CSS v4.0의 최신 문법과 프로젝트 전체의 디자인 시스템(색상, 폰트, 테두리 반경 등)을 정의합니다.
+ */
+
+/* 1.1: Tailwind CSS v4 엔진 및 필요한 플러그인 가져오기 */
 @import "tailwindcss";
+/* @import란: 다른 스타일시트 파일을 가져오는 기능, tailwindcss란: CSS 유틸리티 클래스 프레임워크 */
 @import "tw-animate-css";
+/* Tailwind CSS v4에서 제공하는 애니메이션 */
 @import "shadcn/tailwind.css";
+/* shadcn/ui란: React 컴포넌트 라이브러리 */
 
+/* 1.2: 다크 모드 처리를 위한 커스텀 변형(variant) 설정 */
 @custom-variant dark (&:is(.dark *));
+/* dark (&:is(.dark *))는 .dark 클래스 내부에서만 스타일을 적용하겠다는 의미 */
+/* (&:is()는 해당 클래스가 적용되었을 때만 스타일을 적용하겠다는 의미)
+/* shadcn/ui가 지원하는 dark mode를 의미 */
+/* @custom-variant란: CSS 내에서 사용자 정의 변형(variant)을 만들겠다는 의미 */
 
+
+/* 1.3: Tailwind CSS v4 테마 확장 설정 (@theme inline)
+ * 여기서는 기존 Tailwind 클래스에 매핑될 커스텀 테마 변수들을 인라인으로 연결합니다.
+ * 예: `--color-background`는 Tailwind에서 `bg-background` 클래스로 사용 가능해집니다. */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -48,6 +67,9 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* 1.4: 라이트 모드(기본값)에서의 색상 정의 (:root)
+ * 현대적이고 고급스러운 느낌을 주는 OKLCH 색상 공간을 기반으로 변수를 설정합니다.
+ */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -83,6 +105,11 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+/* 1.5: 다크 모드에서의 색상 오버라이드 (.dark)
+ * 어두운 테마가 적용되었을 때 변수 값들을 자동으로 치환해줍니다.
+ */
+/* .dark는 dark클래스 내부에서만 적용하겠다는 의미 */
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
@@ -117,13 +144,18 @@
   --sidebar-ring: oklch(0.556 0 0);
 }
 
+/* 1.6: 브라우저 기본 엘리먼트 스타일 수정 (@layer base)
+ * HTML 기본 태그의 기본 여백, 색상 등을 프로젝트 테마에 맞추어 보정합니다.
+ */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
   html {
     @apply font-sans;
   }
